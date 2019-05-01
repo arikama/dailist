@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { init } from 'dl/db'
 
 export default class extends Component {
   render () {
@@ -8,5 +9,9 @@ export default class extends Component {
         <Text>Home</Text>
       </View>
     )
+  }
+
+  componentDidMount () {
+    init()
   }
 }
