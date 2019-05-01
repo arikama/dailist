@@ -1,12 +1,6 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { Home } from 'dl/screens'
 
-export default class extends Component {
-  render () {
-    return (
-      <View>
-        <Text>Hello, World!</Text>
-      </View>
-    )
-  }
-}
+export default createAppContainer(createBottomTabNavigator({
+  Home
+}))
