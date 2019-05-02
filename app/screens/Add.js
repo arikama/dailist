@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { Input } from 'react-native-elements'
+import { createStuff } from 'dl/db'
 
 export default class extends Component {
+  state = {
+    inputText: ''
+  }
+
   render () {
     return (
       <View
@@ -13,7 +19,28 @@ export default class extends Component {
           }
         }
       >
-        <Text>Add Screen</Text>
+        <Input
+          autoFocus={true}
+          onChangeText={
+            (text) => {
+              this.setState({ inputText: text })
+            }
+          }
+          onSubmitEditing={
+            () => {
+              if (this.state.inputText === '') {
+                return
+              }
+
+              createStuff(this.state.inputText)
+                .then(() => {
+                  this.setState({ inputText: '' })
+                  this.props.navigation.navigate('Home')
+                })
+            }
+          }
+          value={this.state.inputText}
+        />
       </View>
     )
   }

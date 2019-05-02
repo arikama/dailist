@@ -63,7 +63,8 @@ export const readStuff = async () => {
     .then((db) => {
       return db.executeSql(`
         SELECT id, item, date_created, date_done, date_deleted
-        FROM stuff;
+        FROM stuff
+        ORDER BY date_created DESC;
       `)
     })
     .then(([result]) => {

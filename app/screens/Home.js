@@ -1,19 +1,30 @@
 import React, { Component } from 'react'
-import { Button, Text, View } from 'react-native'
+import { Button, FlatList, Text, View } from 'react-native'
+import { NavigationView } from 'dl/components'
+import { readStuff } from 'dl/db'
 
 export default class extends Component {
+  state = {
+    stuff: []
+  }
+
   render () {
     return (
-      <View
+      <NavigationView
+        onWillFocus={
+          () => {
+            readStuff()
+              .then((stuff) => {
+                this.setState({ stuff })
+              })
+          }
+        }
         style={
           {
-            alignItems: 'center',
-            flex: 1,
             justifyContent: 'center'
           }
         }
       >
-        <Text>Home Screen</Text>
         <Button
           onPress={
             () => {
@@ -22,7 +33,21 @@ export default class extends Component {
           }
           title='Add'
         />
-      </View>
+        <FlatList
+          data={this.state.stuff}
+          keyExtractor={(stuff) => (stuff.id.toString())}
+          renderItem={
+            (item) => {
+              const stuff = item.item
+              return (
+                <View>
+                  <Text>{stuff.item}</Text>
+                </View>
+              )
+            }
+          }
+        />
+      </NavigationView>
     )
   }
 }
