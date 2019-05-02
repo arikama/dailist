@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Button, FlatList, View } from 'react-native'
+import { ActivityIndicator, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions } from 'dl/constants'
@@ -19,14 +19,6 @@ export default class extends Component {
           }
         }
       >
-        <Button
-          onPress={
-            () => {
-              this.props.navigation.navigate('Add')
-            }
-          }
-          title='Add'
-        />
         <FlatList
           data={
             this.state.stuff.filter((stuff) => {
@@ -81,6 +73,33 @@ export default class extends Component {
             }
           }
         />
+        <View
+          style={
+            {
+              alignItems: 'center',
+              backgroundColor: colors.WHITE_SMOKE,
+              borderRadius: dimensions.ICON_BORDER_RADIUS,
+              bottom: 0,
+              elevation: dimensions.ELEVATION,
+              height: dimensions.ICON_SIZE,
+              justifyContent: 'center',
+              margin: dimensions.MARGIN_XLARGE,
+              position: 'absolute',
+              right: 0,
+              width: dimensions.ICON_SIZE
+            }
+          }
+        >
+          <Icon
+            name='add'
+            onPress={
+              () => {
+                this.props.navigation.navigate('Add')
+              }
+            }
+            type='material'
+          />
+        </View>
       </NavigationView>
     )
   }
