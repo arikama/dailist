@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ActivityIndicator, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
-import { colors, dimensions } from 'dl/constants'
+import { colors, dimensions, routes } from 'dl/constants'
 import { readStuff, updateStuffDateDeleted } from 'dl/db'
 
 export default class extends Component {
@@ -94,7 +94,7 @@ export default class extends Component {
             name='add'
             onPress={
               () => {
-                this.props.navigation.navigate('Add')
+                this.props.navigation.navigate(routes.ADD)
               }
             }
             type='material'

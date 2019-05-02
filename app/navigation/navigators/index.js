@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from 'react-native-elements'
 import { createBottomTabNavigator } from 'react-navigation'
-import { colors } from 'dl/constants'
+import { colors, routes } from 'dl/constants'
 import { Archived, Deleted } from 'dl/screens'
 import MainStack from './main-stack'
 
@@ -17,19 +17,19 @@ const tabBarIcon = (name) => ({ tintColor }) => {
 
 export default createBottomTabNavigator(
   {
-    Archived: {
+    [routes.ARCHIVED]: {
       navigationOptions: {
         tabBarIcon: tabBarIcon('archive')
       },
       screen: Archived
     },
-    Deleted: {
+    [routes.DELETED]: {
       navigationOptions: {
         tabBarIcon: tabBarIcon('delete')
       },
       screen: Deleted
     },
-    MainStack: {
+    [routes.MAIN_STACK]: {
       navigationOptions: {
         tabBarIcon: tabBarIcon('spa')
       },
@@ -37,8 +37,8 @@ export default createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'MainStack',
-    order: ['Deleted', 'MainStack', 'Archived'],
+    initialRouteName: routes.MAIN_STACK,
+    order: [routes.DELETED, routes.MAIN_STACK, routes.ARCHIVED],
     tabBarOptions: {
       activeTintColor: colors.MEDIUM_SEA_GREEN,
       inactiveTintColor: colors.GREY,
