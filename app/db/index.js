@@ -1,4 +1,5 @@
 export {
   close,
-  init
+  createStuff,
+  readStuff
 } from './db'
