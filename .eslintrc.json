@@ -9,6 +9,7 @@
     "react-native"
   ],
   "rules": {
+    "operator-linebreak": 0,
     "no-unused-vars": 0
   }
 }
