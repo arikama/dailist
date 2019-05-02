@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import App from './App'
+import Navigation from 'dl/navigation'
 
 export default class extends Component {
   render () {
     return (
-      <App/>
+      <Navigation/>
     )
   }
 }

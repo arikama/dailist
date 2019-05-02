@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 
 export default class extends Component {
   render () {
@@ -13,15 +13,7 @@ export default class extends Component {
           }
         }
       >
-        <Text>Home Screen</Text>
-        <Button
-          onPress={
-            () => {
-              this.props.navigation.navigate('Add')
-            }
-          }
-          title='Add'
-        />
+        <Text>Add Screen</Text>
       </View>
     )
   }
