@@ -3,7 +3,7 @@ import { ActivityIndicator, Button, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions } from 'dl/constants'
-import { readStuff, updateStuffDateDeleted } from 'dl/db'
+import { readStuff, updateStuffDateDeletedToNull } from 'dl/db'
 
 export default class extends Component {
   state = {
@@ -19,18 +19,10 @@ export default class extends Component {
           }
         }
       >
-        <Button
-          onPress={
-            () => {
-              this.props.navigation.navigate('Add')
-            }
-          }
-          title='Add'
-        />
         <FlatList
           data={
             this.state.stuff.filter((stuff) => {
-              return !stuff.date_deleted
+              return stuff.date_deleted
             })
           }
           keyExtractor={(stuff) => (stuff.id.toString())}
@@ -39,15 +31,15 @@ export default class extends Component {
               const stuff = item.item
               return (
                 <StuffSnippet
-                  onSwipeableRightOpen={
+                  onSwipeableLeftOpen={
                     () => {
-                      updateStuffDateDeleted(stuff.id)
+                      updateStuffDateDeletedToNull(stuff.id)
                         .then(() => {
                           this.updateReadStuff()
                         })
                     }
                   }
-                  renderRightActions={
+                  renderLeftActions={
                     (willOpen) => () => {
                       return (
                         <View
@@ -62,11 +54,11 @@ export default class extends Component {
                             willOpen
                               ?
                               <ActivityIndicator
-                                color={colors.TOMATO}
+                                color={colors.MEDIUM_SEA_GREEN}
                               />
                               :
                               <Icon
-                                color={colors.TOMATO}
+                                color={colors.MEDIUM_SEA_GREEN}
                                 name='delete'
                                 type='material'
                               />
