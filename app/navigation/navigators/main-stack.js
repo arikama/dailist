@@ -7,6 +7,9 @@ export default createStackNavigator(
     Home
   },
   {
+    defaultNavigationOptions: {
+      header: null
+    },
     initialRouteName: 'Home'
   }
 )
