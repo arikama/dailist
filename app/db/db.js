@@ -77,3 +77,23 @@ export const readStuff = async () => {
       return stuff
     })
 }
+
+// UPDATE
+
+export const updateStuffDateDeleted = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_deleted = CURRENT_TIMESTAMP WHERE id = ?;
+      `, [id])
+    })
+}
+
+export const updateStuffDateDeletedToNull = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_deleted = NULL WHERE id = ?;
+      `, [id])
+    })
+}

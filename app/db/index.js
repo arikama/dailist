@@ -1,5 +1,7 @@
 export {
   close,
   createStuff,
-  readStuff
+  readStuff,
+  updateStuffDateDeleted,
+  updateStuffDateDeletedToNull
 } from './db'
