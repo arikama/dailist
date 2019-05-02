@@ -36,6 +36,7 @@ const open = async () => {
           item TEXT NOT NULL,
           date_created TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
           date_done TEXT,
+          date_archived TEXT,
           date_deleted TEXT
         );
       `)
@@ -62,7 +63,7 @@ export const readStuff = async () => {
   return open()
     .then((db) => {
       return db.executeSql(`
-        SELECT id, item, date_created, date_done, date_deleted
+        SELECT id, item, date_created, date_done, date_archived, date_deleted
         FROM stuff
         ORDER BY date_created DESC;
       `)
