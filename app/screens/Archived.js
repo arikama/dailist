@@ -23,6 +23,21 @@ export default class extends Component {
         }
       >
         <FlatList
+          ListFooterComponent={
+            () => {
+              return (
+                <View
+                  style={
+                    {
+                      height: dimensions.LENGTH_250,
+                      justifyContent: 'center'
+                    }
+                  }
+                >
+                </View>
+              )
+            }
+          }
           data={
             this.state.stuff
               .map((stuff) => {
