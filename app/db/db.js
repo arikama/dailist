@@ -59,12 +59,25 @@ export const createStuff = async (item) => {
 
 // READ
 
-export const readStuff = async () => {
+export const readStuff = async (isArchived = false, isDeleted = false) => {
   return open()
     .then((db) => {
+      let whereClause = ''
+
+      if (isArchived && isDeleted) {
+        whereClause = 'WHERE date_archived NOT NULL AND date_deleted NOT NULL'
+      } else if (isArchived && !isDeleted) {
+        whereClause = 'WHERE date_archived NOT NULL AND date_deleted ISNULL'
+      } else if (!isArchived && isDeleted) {
+        whereClause = 'WHERE date_archived ISNULL AND date_deleted NOT NULL'
+      } else {
+        whereClause = 'WHERE date_archived ISNULL AND date_deleted ISNULL'
+      }
+
       return db.executeSql(`
         SELECT id, item, date_created, date_done, date_archived, date_deleted
         FROM stuff
+        ${whereClause}
         ORDER BY date_created DESC;
       `)
     })
@@ -80,6 +93,24 @@ export const readStuff = async () => {
 }
 
 // UPDATE
+
+export const updateStuffDateArchived = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_archived = CURRENT_TIMESTAMP WHERE id = ?;
+      `, [id])
+    })
+}
+
+export const updateStuffDateArchivedToNull = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_archived = NULL WHERE id = ?;
+      `, [id])
+    })
+}
 
 export const updateStuffDateDeleted = async (id) => {
   return open()

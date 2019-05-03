@@ -5,6 +5,7 @@ import { NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions, routes } from 'dl/constants'
 import {
   readStuff,
+  updateStuffDateArchived,
   updateStuffDateDeleted,
   updateStuffDateDone,
   updateStuffDateDoneToNull
@@ -27,9 +28,6 @@ export default class extends Component {
         <FlatList
           data={
             this.state.stuff
-              .filter((stuff) => {
-                return !stuff.date_deleted
-              })
               .map((stuff) => {
                 return {
                   dateCreated: stuff.date_created,
@@ -58,12 +56,51 @@ export default class extends Component {
                         })
                     }
                   }
+                  onSwipeableLeftOpen={
+                    () => {
+                      updateStuffDateArchived(stuff.id)
+                        .then(() => {
+                          this.updateReadStuff()
+                        })
+                    }
+                  }
                   onSwipeableRightOpen={
                     () => {
                       updateStuffDateDeleted(stuff.id)
                         .then(() => {
                           this.updateReadStuff()
                         })
+                    }
+                  }
+                  renderLeftActions={
+                    (willOpen) => () => {
+                      return (
+                        <View
+                          style={
+                            {
+                              alignItems: 'flex-start',
+                              backgroundColor: colors.MEDIUM_SEA_GREEN,
+                              justifyContent: 'center',
+                              paddingLeft: dimensions.PADDING,
+                              width: dimensions.PERCENT_100
+                            }
+                          }
+                        >
+                          {
+                            willOpen
+                              ?
+                              <ActivityIndicator
+                                color={colors.WHITE}
+                              />
+                              :
+                              <Icon
+                                color={colors.WHITE}
+                                name='archive'
+                                type='material'
+                              />
+                          }
+                        </View>
+                      )
                     }
                   }
                   renderRightActions={

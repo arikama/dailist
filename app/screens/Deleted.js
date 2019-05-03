@@ -22,9 +22,6 @@ export default class extends Component {
         <FlatList
           data={
             this.state.stuff
-              .filter((stuff) => {
-                return stuff.date_deleted
-              })
               .map((stuff) => {
                 return {
                   dateCreated: stuff.date_created,
@@ -71,7 +68,7 @@ export default class extends Component {
                               :
                               <Icon
                                 color={colors.WHITE}
-                                name='delete'
+                                name='restore'
                                 type='material'
                               />
                           }
@@ -90,7 +87,7 @@ export default class extends Component {
   }
 
   updateReadStuff () {
-    return readStuff()
+    return readStuff(false, true)
       .then((stuff) => {
         this.setState({ stuff })
       })
