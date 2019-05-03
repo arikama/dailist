@@ -43,6 +43,7 @@ export default class extends Component {
               const stuff = item.item
               return (
                 <StuffSnippet
+                  iconColorDone={colors.MEDIUM_SEA_GREEN}
                   onPressCheckBox={
                     () => {
                       const promise = stuff.dateDone

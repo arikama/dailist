@@ -9,6 +9,7 @@ import { convertToLocal } from 'dl/utils'
 
 export default class extends Component {
   static propTypes = {
+    iconColorDone: PropTypes.string,
     onPressCheckBox: PropTypes.func,
     onSwipeableLeftOpen: PropTypes.func,
     onSwipeableLeftWillOpen: PropTypes.func,
@@ -109,7 +110,12 @@ export default class extends Component {
             !this.props.stuff.dateDeleted
             &&
             <Icon
-              color={this.props.stuff.dateDone ? colors.MEDIUM_SEA_GREEN : colors.GREY}
+              color={
+                this.props.stuff.dateDone
+                  ? (this.props.iconColorDone || colors.GREY)
+                  :
+                  colors.GREY
+              }
               containerStyle={
                 {
                   padding: dimensions.PADDING
