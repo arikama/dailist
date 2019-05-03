@@ -21,9 +21,18 @@ export default class extends Component {
       >
         <FlatList
           data={
-            this.state.stuff.filter((stuff) => {
-              return !stuff.date_deleted
-            })
+            this.state.stuff
+              .filter((stuff) => {
+                return !stuff.date_deleted
+              })
+              .map((stuff) => {
+                return {
+                  dateCreated: stuff.date_created,
+                  dateDone: stuff.date_done,
+                  id: stuff.id,
+                  item: stuff.item
+                }
+              })
           }
           keyExtractor={(stuff) => (stuff.id.toString())}
           renderItem={
@@ -45,8 +54,11 @@ export default class extends Component {
                         <View
                           style={
                             {
+                              alignItems: 'flex-end',
+                              backgroundColor: colors.TOMATO,
                               justifyContent: 'center',
-                              width: dimensions.LENGTH_50
+                              paddingRight: dimensions.PADDING,
+                              width: dimensions.PERCENT_100
                             }
                           }
                         >
@@ -54,11 +66,11 @@ export default class extends Component {
                             willOpen
                               ?
                               <ActivityIndicator
-                                color={colors.TOMATO}
+                                color={colors.WHITE}
                               />
                               :
                               <Icon
-                                color={colors.TOMATO}
+                                color={colors.WHITE}
                                 name='delete'
                                 type='material'
                               />

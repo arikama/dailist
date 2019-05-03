@@ -1,6 +1,8 @@
 export default {
+  BLACK: '#000000',
   GREY: '#808080',
   MEDIUM_SEA_GREEN: '#3CB371',
   TOMATO: '#FF6347',
+  WHITE: '#FFFFFF',
   WHITE_SMOKE: '#F5F5F5'
 }

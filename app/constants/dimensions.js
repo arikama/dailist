@@ -28,5 +28,6 @@ export default {
 
   PERCENT_50: '50%',
   PERCENT_80: '80%',
-  PERCENT_90: '90%'
+  PERCENT_90: '90%',
+  PERCENT_100: '100%'
 }

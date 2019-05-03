@@ -1,8 +1,11 @@
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { Icon } from 'react-native-elements'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import { dimensions } from 'dl/constants'
+import { colors, dimensions, fontSizes } from 'dl/constants'
+import { convertToLocal } from 'dl/utils'
 
 export default class extends Component {
   static propTypes = {
@@ -13,6 +16,10 @@ export default class extends Component {
     renderLeftActions: PropTypes.func,
     renderRightActions: PropTypes.func,
     stuff: PropTypes.shape({
+      dateCreated: PropTypes.string.isRequired,
+      dateDeleted: PropTypes.string,
+      dateDone: PropTypes.string,
+      id: PropTypes.number.isRequired,
       item: PropTypes.string.isRequired
     })
   }
@@ -55,13 +62,57 @@ export default class extends Component {
         <View
           style={
             {
-              height: dimensions.LENGTH_50,
-              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: colors.WHITE,
+              flexDirection: 'row',
               padding: dimensions.PADDING
             }
           }
         >
-          <Text>{this.props.stuff.item}</Text>
+          <View
+            style={
+              {
+                flex: 1
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  color: colors.BLACK
+                }
+              }
+            >
+              {this.props.stuff.item}
+            </Text>
+            <Text
+              style={
+                {
+                  color: colors.GREY,
+                  fontSize: fontSizes.SMALL
+                }
+              }
+            >
+              {
+                moment(convertToLocal(this.props.stuff.dateCreated)).calendar(null, {
+                  sameDay: '[Today]',
+                  lastDay: '[Yesterday]',
+                  lastWeek: '[Last] dddd',
+                  sameElse: 'YYYY-MM-DD'
+                })
+              }
+            </Text>
+          </View>
+          <Icon
+            color={colors.GREY}
+            containerStyle={
+              {
+                padding: dimensions.PADDING
+              }
+            }
+            name={this.props.stuff.dateDone ? 'check-box' : 'check-box-outline-blank'}
+            type='material'
+          />
         </View>
       </Swipeable>
     )
