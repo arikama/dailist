@@ -142,7 +142,7 @@ export default class extends Component {
                               :
                               <Icon
                                 color={colors.WHITE}
-                                name='delete'
+                                name='delete-sweep'
                                 type='material'
                               />
                           }

@@ -1,6 +1,7 @@
 export {
   close,
   createStuff,
+  deleteStuff,
   readStuff,
   updateStuffDateArchived,
   updateStuffDateArchivedToNull,

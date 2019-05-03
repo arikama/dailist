@@ -3,7 +3,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions } from 'dl/constants'
-import { readStuff, updateStuffDateDeletedToNull } from 'dl/db'
+import { deleteStuff, readStuff, updateStuffDateDeletedToNull } from 'dl/db'
 
 export default class extends Component {
   state = {
@@ -60,6 +60,14 @@ export default class extends Component {
                         })
                     }
                   }
+                  onSwipeableRightOpen={
+                    () => {
+                      deleteStuff(stuff.id)
+                        .then(() => {
+                          this.updateReadStuff()
+                        })
+                    }
+                  }
                   renderLeftActions={
                     (willOpen) => () => {
                       return (
@@ -84,6 +92,37 @@ export default class extends Component {
                               <Icon
                                 color={colors.WHITE}
                                 name='restore'
+                                type='material'
+                              />
+                          }
+                        </View>
+                      )
+                    }
+                  }
+                  renderRightActions={
+                    (willOpen) => () => {
+                      return (
+                        <View
+                          style={
+                            {
+                              alignItems: 'flex-end',
+                              backgroundColor: colors.TOMATO,
+                              justifyContent: 'center',
+                              paddingRight: dimensions.PADDING,
+                              width: dimensions.PERCENT_100
+                            }
+                          }
+                        >
+                          {
+                            willOpen
+                              ?
+                              <ActivityIndicator
+                                color={colors.WHITE}
+                              />
+                              :
+                              <Icon
+                                color={colors.WHITE}
+                                name='delete'
                                 type='material'
                               />
                           }

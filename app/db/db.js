@@ -147,3 +147,14 @@ export const updateStuffDateDoneToNull = async (id) => {
       `, [id])
     })
 }
+
+// DELETE
+
+export const deleteStuff = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        DELETE FROM stuff WHERE id = ?;
+      `, [id])
+    })
+}
