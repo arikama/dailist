@@ -5,10 +5,16 @@ import { colors, routes } from 'dl/constants'
 import { Archived, Deleted } from 'dl/screens'
 import MainStack from './main-stack'
 
-const tabBarIcon = (name) => ({ tintColor }) => {
+const tabBarIcon = (name, iconColor = '') => ({ focused, tintColor }) => {
+  let finalTintColor = tintColor
+
+  if (iconColor && focused) {
+    finalTintColor = iconColor
+  }
+
   return (
     <Icon
-      color={tintColor}
+      color={finalTintColor}
       name={name}
       type='material'
     />
@@ -25,7 +31,7 @@ export default createBottomTabNavigator(
     },
     [routes.DELETED]: {
       navigationOptions: {
-        tabBarIcon: tabBarIcon('delete')
+        tabBarIcon: tabBarIcon('delete', colors.TOMATO)
       },
       screen: Deleted
     },
