@@ -80,7 +80,8 @@ export default class extends Component {
             <Text
               style={
                 {
-                  color: colors.BLACK
+                  color: colors.BLACK,
+                  textDecorationLine: this.props.stuff.dateDeleted ? 'line-through' : 'none'
                 }
               }
             >
@@ -104,17 +105,21 @@ export default class extends Component {
               }
             </Text>
           </View>
-          <Icon
-            color={this.props.stuff.dateDone ? colors.MEDIUM_SEA_GREEN : colors.GREY}
-            containerStyle={
-              {
-                padding: dimensions.PADDING
+          {
+            !this.props.stuff.dateDeleted
+            &&
+            <Icon
+              color={this.props.stuff.dateDone ? colors.MEDIUM_SEA_GREEN : colors.GREY}
+              containerStyle={
+                {
+                  padding: dimensions.PADDING
+                }
               }
-            }
-            name={this.props.stuff.dateDone ? 'check-box' : 'check-box-outline-blank'}
-            onPress={this.props.onPressCheckBox || (() => {})}
-            type='material'
-          />
+              name={this.props.stuff.dateDone ? 'check-box' : 'check-box-outline-blank'}
+              onPress={this.props.onPressCheckBox || (() => {})}
+              type='material'
+            />
+          }
         </View>
       </Swipeable>
     )

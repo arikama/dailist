@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
+import { colors } from 'dl/constants'
 
 export default class extends Component {
   render () {
@@ -8,6 +9,7 @@ export default class extends Component {
       <View
         style={
           {
+            backgroundColor: colors.WHITE,
             flex: 1,
             ...this.props.style
           }
