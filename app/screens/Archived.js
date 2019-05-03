@@ -57,7 +57,7 @@ export default class extends Component {
               let prevDateCreated
 
               if (item.index > 0) {
-                const date = this.state.stuff[item.index].date_created
+                const date = this.state.stuff[item.index - 1].date_created
                 prevDateCreated = moment(date).format(app.DATE_FORMAT)
               }
 
