@@ -3,5 +3,7 @@ export {
   createStuff,
   readStuff,
   updateStuffDateDeleted,
-  updateStuffDateDeletedToNull
+  updateStuffDateDeletedToNull,
+  updateStuffDateDone,
+  updateStuffDateDoneToNull
 } from './db'

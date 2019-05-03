@@ -3,7 +3,12 @@ import { ActivityIndicator, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions, routes } from 'dl/constants'
-import { readStuff, updateStuffDateDeleted } from 'dl/db'
+import {
+  readStuff,
+  updateStuffDateDeleted,
+  updateStuffDateDone,
+  updateStuffDateDoneToNull
+} from 'dl/db'
 
 export default class extends Component {
   state = {
@@ -40,6 +45,19 @@ export default class extends Component {
               const stuff = item.item
               return (
                 <StuffSnippet
+                  onPressCheckBox={
+                    () => {
+                      const promise = stuff.dateDone
+                        ?
+                        updateStuffDateDoneToNull(stuff.id)
+                        :
+                        updateStuffDateDone(stuff.id)
+                      promise
+                        .then(() => {
+                          return this.updateReadStuff()
+                        })
+                    }
+                  }
                   onSwipeableRightOpen={
                     () => {
                       updateStuffDateDeleted(stuff.id)

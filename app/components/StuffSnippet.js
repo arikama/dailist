@@ -9,6 +9,7 @@ import { convertToLocal } from 'dl/utils'
 
 export default class extends Component {
   static propTypes = {
+    onPressCheckBox: PropTypes.func,
     onSwipeableLeftOpen: PropTypes.func,
     onSwipeableLeftWillOpen: PropTypes.func,
     onSwipeableRightOpen: PropTypes.func,
@@ -104,13 +105,14 @@ export default class extends Component {
             </Text>
           </View>
           <Icon
-            color={colors.GREY}
+            color={this.props.stuff.dateDone ? colors.MEDIUM_SEA_GREEN : colors.GREY}
             containerStyle={
               {
                 padding: dimensions.PADDING
               }
             }
             name={this.props.stuff.dateDone ? 'check-box' : 'check-box-outline-blank'}
+            onPress={this.props.onPressCheckBox || (() => {})}
             type='material'
           />
         </View>

@@ -98,3 +98,21 @@ export const updateStuffDateDeletedToNull = async (id) => {
       `, [id])
     })
 }
+
+export const updateStuffDateDone = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_done = CURRENT_TIMESTAMP WHERE id = ?;
+      `, [id])
+    })
+}
+
+export const updateStuffDateDoneToNull = async (id) => {
+  return open()
+    .then((db) => {
+      return db.executeSql(`
+        UPDATE stuff SET date_done = NULL WHERE id = ?;
+      `, [id])
+    })
+}
