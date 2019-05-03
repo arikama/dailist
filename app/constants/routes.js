@@ -2,5 +2,8 @@ export default {
   ADD: 'Add',
   ARCHIVED: 'Archived',
   DELETED: 'Deleted',
-  MAIN_STACK: 'MainStack'
+  HOME: 'Home',
+  LEFT_STACK: 'LeftStack',
+  MAIN_STACK: 'MainStack',
+  RIGHT_STACK: 'RightStack'
 }

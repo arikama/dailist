@@ -4,6 +4,10 @@ import { Input } from 'react-native-elements'
 import { createStuff } from 'dl/db'
 
 export default class extends Component {
+  static navigationOptions = {
+    title: 'Add'
+  }
+
   state = {
     inputText: ''
   }

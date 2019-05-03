@@ -1,11 +1,10 @@
 import { createStackNavigator } from 'react-navigation'
 import { colors, dimensions, routes } from 'dl/constants'
-import { Add, Home } from 'dl/screens'
+import { Deleted } from 'dl/screens'
 
 export default createStackNavigator(
   {
-    Add,
-    Home
+    Deleted
   },
   {
     defaultNavigationOptions: {
@@ -17,8 +16,8 @@ export default createStackNavigator(
         color: colors.GREY,
         marginHorizontal: dimensions.MARGIN
       },
-      title: 'Dailist'
+      title: 'Removed'
     },
-    initialRouteName: routes.HOME
+    initialRouteName: routes.DELETED
   }
 )
