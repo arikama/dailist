@@ -1,8 +1,9 @@
+import moment from 'moment'
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { NavigationView, StuffSnippet } from 'dl/components'
-import { colors, dimensions, routes } from 'dl/constants'
+import { app, colors, dimensions, routes } from 'dl/constants'
 import {
   readStuff
 } from 'dl/db'
@@ -37,41 +38,42 @@ export default class extends Component {
           renderItem={
             (item) => {
               const stuff = item.item
+              let currDateCreated = moment(stuff.dateCreated).format(app.DATE_FORMAT)
+              let prevDateCreated
+
+              if (item.index > 0) {
+                const date = this.state.stuff[item.index].date_created
+                prevDateCreated = moment(date).format(app.DATE_FORMAT)
+              }
+
+              if (item.index !== 0 && currDateCreated === prevDateCreated) {
+                currDateCreated = null
+              }
+
               return (
-                <StuffSnippet
-                  stuff={stuff}
-                />
+                <View>
+                  {
+                    currDateCreated
+                    &&
+                    <Text
+                      style={
+                        {
+                          padding: dimensions.PADDING,
+                          textAlign: 'center'
+                        }
+                      }
+                    >
+                      {currDateCreated}
+                    </Text>
+                  }
+                  <StuffSnippet
+                    stuff={stuff}
+                  />
+                </View>
               )
             }
           }
         />
-        <View
-          style={
-            {
-              alignItems: 'center',
-              backgroundColor: colors.WHITE_SMOKE,
-              borderRadius: dimensions.ICON_BORDER_RADIUS,
-              bottom: 0,
-              elevation: dimensions.ELEVATION,
-              height: dimensions.ICON_SIZE,
-              justifyContent: 'center',
-              margin: dimensions.MARGIN_XLARGE,
-              position: 'absolute',
-              right: 0,
-              width: dimensions.ICON_SIZE
-            }
-          }
-        >
-          <Icon
-            name='add'
-            onPress={
-              () => {
-                this.props.navigation.navigate(routes.ADD)
-              }
-            }
-            type='material'
-          />
-        </View>
       </NavigationView>
     )
   }
