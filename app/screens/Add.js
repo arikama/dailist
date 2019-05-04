@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Input } from 'react-native-elements'
+import { colors, dimensions } from 'dl/constants'
 import { createStuff } from 'dl/db'
 
 export default class extends Component {
@@ -17,14 +18,24 @@ export default class extends Component {
       <View
         style={
           {
-            alignItems: 'center',
-            flex: 1,
-            justifyContent: 'center'
+            flex: 1
           }
         }
       >
         <Input
           autoFocus={true}
+          inputContainerStyle={
+            {
+              borderBottomColor: colors.WHITE_SMOKE,
+              borderBottomWidth: dimensions.BORDER_WIDTH
+            }
+          }
+          label='Title'
+          labelStyle={
+            {
+              color: colors.GREY
+            }
+          }
           onChangeText={
             (text) => {
               this.setState({ inputText: text })
