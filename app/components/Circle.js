@@ -5,31 +5,32 @@ import { colors, dimensions } from 'dl/constants'
 
 export default class extends Component {
   static propTypes = {
+    containerStyle: PropTypes.object,
+    iconColor: PropTypes.string,
+    iconName: PropTypes.string.isRequired,
     onPress: PropTypes.func
   }
 
   render () {
     return (
       <Icon
-        color={colors.GREY}
+        color={this.props.iconColor || colors.GREY}
         containerStyle={
           {
             alignItems: 'center',
             backgroundColor: colors.WHITE_SMOKE,
             borderRadius: dimensions.ICON_BORDER_RADIUS,
-            bottom: 0,
             elevation: dimensions.ELEVATION,
             height: dimensions.ICON_SIZE,
             justifyContent: 'center',
-            margin: dimensions.MARGIN_XLARGE,
-            position: 'absolute',
-            right: 0,
-            width: dimensions.ICON_SIZE
+            width: dimensions.ICON_SIZE,
+            ...this.props.containerStyle
           }
         }
-        name='add'
+        name={this.props.iconName}
         onPress={this.props.onPress}
         type='material'
+        underlayColor={colors.WHITE_SMOKE}
       />
     )
   }

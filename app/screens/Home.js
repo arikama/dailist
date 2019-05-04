@@ -156,13 +156,25 @@ export default class extends Component {
             }
           }
         />
-        <Circle
-          onPress={
-            () => {
-              this.props.navigation.navigate(routes.ADD)
+        <View
+          style={
+            {
+              bottom: 0,
+              margin: dimensions.MARGIN_XLARGE,
+              position: 'absolute',
+              right: 0
             }
           }
-        />
+        >
+          <Circle
+            iconName='add'
+            onPress={
+              () => {
+                this.props.navigation.navigate(routes.ADD)
+              }
+            }
+          />
+        </View>
       </NavigationView>
     )
   }
