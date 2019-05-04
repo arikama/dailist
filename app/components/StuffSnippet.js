@@ -74,7 +74,8 @@ export default class extends Component {
           <View
             style={
               {
-                flex: 1
+                flex: 1,
+                paddingLeft: dimensions.PADDING_XSMALL
               }
             }
           >
@@ -118,7 +119,8 @@ export default class extends Component {
               }
               containerStyle={
                 {
-                  padding: dimensions.PADDING
+                  padding: dimensions.PADDING,
+                  paddingRight: 0
                 }
               }
               name={this.props.stuff.dateDone ? 'check-box' : 'check-box-outline-blank'}
