@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, FlatList, View } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { NavigationView, StuffSnippet } from 'dl/components'
+import { Circle, NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions, routes } from 'dl/constants'
 import {
   readStuff,
@@ -156,33 +156,13 @@ export default class extends Component {
             }
           }
         />
-        <View
-          style={
-            {
-              alignItems: 'center',
-              backgroundColor: colors.WHITE_SMOKE,
-              borderRadius: dimensions.ICON_BORDER_RADIUS,
-              bottom: 0,
-              elevation: dimensions.ELEVATION,
-              height: dimensions.ICON_SIZE,
-              justifyContent: 'center',
-              margin: dimensions.MARGIN_XLARGE,
-              position: 'absolute',
-              right: 0,
-              width: dimensions.ICON_SIZE
+        <Circle
+          onPress={
+            () => {
+              this.props.navigation.navigate(routes.ADD)
             }
           }
-        >
-          <Icon
-            name='add'
-            onPress={
-              () => {
-                this.props.navigation.navigate(routes.ADD)
-              }
-            }
-            type='material'
-          />
-        </View>
+        />
       </NavigationView>
     )
   }
