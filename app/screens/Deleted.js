@@ -7,6 +7,7 @@ import { deleteStuff, readStuff, updateStuffDateDeletedToNull } from 'dl/db'
 
 export default class extends Component {
   state = {
+    isLoading: true,
     stuff: []
   }
 
@@ -15,7 +16,11 @@ export default class extends Component {
       <NavigationView
         onWillFocus={
           () => {
+            this.setState({ isLoading: true })
             this.updateReadStuff()
+              .then(() => {
+                this.setState({ isLoading: false })
+              })
           }
         }
       >
@@ -140,15 +145,19 @@ export default class extends Component {
               }
             />
             :
-            <Greet
-              greeting='Nothing to see here.'
-              iconName='delete-sweep'
-              style={
-                {
-                  flex: 1
+            this.state.isLoading
+              ?
+              null
+              :
+              <Greet
+                greeting='Nothing to see here.'
+                iconName='delete-sweep'
+                style={
+                  {
+                    flex: 1
+                  }
                 }
-              }
-            />
+              />
         }
       </NavigationView>
     )

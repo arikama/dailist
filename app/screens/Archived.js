@@ -1,15 +1,15 @@
 import moment from 'moment'
 import React, { Component } from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { Icon } from 'react-native-elements'
 import { Greet, NavigationView, StuffSnippet } from 'dl/components'
-import { app, colors, dimensions, routes } from 'dl/constants'
+import { app, dimensions } from 'dl/constants'
 import {
   readStuff
 } from 'dl/db'
 
 export default class extends Component {
   state = {
+    isLoading: true,
     stuff: []
   }
 
@@ -18,7 +18,11 @@ export default class extends Component {
       <NavigationView
         onWillFocus={
           () => {
+            this.setState({ isLoading: true })
             this.updateReadStuff()
+              .then(() => {
+                this.setState({ isLoading: false })
+              })
           }
         }
       >
@@ -93,15 +97,19 @@ export default class extends Component {
               }
             />
             :
-            <Greet
-              greeting='Nothing to see here.'
-              iconName='archive'
-              style={
-                {
-                  flex: 1
+            this.state.isLoading
+              ?
+              null
+              :
+              <Greet
+                greeting='Nothing to see here.'
+                iconName='archive'
+                style={
+                  {
+                    flex: 1
+                  }
                 }
-              }
-            />
+              />
         }
       </NavigationView>
     )

@@ -13,6 +13,7 @@ import {
 
 export default class extends Component {
   state = {
+    isLoading: true,
     stuff: []
   }
 
@@ -21,7 +22,11 @@ export default class extends Component {
       <NavigationView
         onWillFocus={
           () => {
+            this.setState({ isLoading: true })
             this.updateReadStuff()
+              .then(() => {
+                this.setState({ isLoading: false })
+              })
           }
         }
       >
@@ -160,15 +165,19 @@ export default class extends Component {
               }
             />
             :
-            <Greet
-              greeting="You're all done. Enjoy your day!"
-              iconName='mood'
-              style={
-                {
-                  flex: 1
+            this.state.isLoading
+              ?
+              null
+              :
+              <Greet
+                greeting="You're all done. Enjoy your day!"
+                iconName='mood'
+                style={
+                  {
+                    flex: 1
+                  }
                 }
-              }
-            />
+              />
         }
         <View
           style={
