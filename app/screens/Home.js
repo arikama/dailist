@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, FlatList, View } from 'react-native'
+import { ActivityIndicator, FlatList, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { Circle, NavigationView, StuffSnippet } from 'dl/components'
+import { Circle, Greet, NavigationView, StuffSnippet } from 'dl/components'
 import { colors, dimensions, routes } from 'dl/constants'
 import {
   readStuff,
@@ -25,137 +25,151 @@ export default class extends Component {
           }
         }
       >
-        <FlatList
-          ListFooterComponent={
-            () => {
-              return (
-                <View
-                  style={
-                    {
-                      height: dimensions.LENGTH_250,
-                      justifyContent: 'center'
-                    }
-                  }
-                >
-                </View>
-              )
-            }
-          }
-          data={
-            this.state.stuff
-              .map((stuff) => {
-                return {
-                  dateCreated: stuff.date_created,
-                  dateDone: stuff.date_done,
-                  id: stuff.id,
-                  item: stuff.item
+        {
+          this.state.stuff.length
+            ?
+            <FlatList
+              ListFooterComponent={
+                () => {
+                  return (
+                    <View
+                      style={
+                        {
+                          height: dimensions.LENGTH_250,
+                          justifyContent: 'center'
+                        }
+                      }
+                    >
+                    </View>
+                  )
                 }
-              })
-          }
-          keyExtractor={(stuff) => (stuff.id.toString())}
-          renderItem={
-            (item) => {
-              const stuff = item.item
-              return (
-                <StuffSnippet
-                  iconColorDone={colors.MEDIUM_SEA_GREEN}
-                  onPressCheckBox={
-                    () => {
-                      const promise = stuff.dateDone
-                        ?
-                        updateStuffDateDoneToNull(stuff.id)
-                        :
-                        updateStuffDateDone(stuff.id)
-                      promise
-                        .then(() => {
-                          return this.updateReadStuff()
-                        })
+              }
+              data={
+                this.state.stuff
+                  .map((stuff) => {
+                    return {
+                      dateCreated: stuff.date_created,
+                      dateDone: stuff.date_done,
+                      id: stuff.id,
+                      item: stuff.item
                     }
-                  }
-                  onSwipeableLeftOpen={
-                    () => {
-                      updateStuffDateArchived(stuff.id)
-                        .then(() => {
-                          this.updateReadStuff()
-                        })
-                    }
-                  }
-                  onSwipeableRightOpen={
-                    () => {
-                      updateStuffDateDeleted(stuff.id)
-                        .then(() => {
-                          this.updateReadStuff()
-                        })
-                    }
-                  }
-                  renderLeftActions={
-                    (willOpen) => () => {
-                      return (
-                        <View
-                          style={
-                            {
-                              alignItems: 'flex-start',
-                              backgroundColor: colors.MEDIUM_SEA_GREEN,
-                              justifyContent: 'center',
-                              paddingLeft: dimensions.PADDING,
-                              width: dimensions.PERCENT_100
-                            }
-                          }
-                        >
-                          {
-                            willOpen
-                              ?
-                              <ActivityIndicator
-                                color={colors.WHITE}
-                              />
-                              :
-                              <Icon
-                                color={colors.WHITE}
-                                name='archive'
-                                type='material'
-                              />
-                          }
-                        </View>
-                      )
-                    }
-                  }
-                  renderRightActions={
-                    (willOpen) => () => {
-                      return (
-                        <View
-                          style={
-                            {
-                              alignItems: 'flex-end',
-                              backgroundColor: colors.TOMATO,
-                              justifyContent: 'center',
-                              paddingRight: dimensions.PADDING,
-                              width: dimensions.PERCENT_100
-                            }
-                          }
-                        >
-                          {
-                            willOpen
-                              ?
-                              <ActivityIndicator
-                                color={colors.WHITE}
-                              />
-                              :
-                              <Icon
-                                color={colors.WHITE}
-                                name='delete-sweep'
-                                type='material'
-                              />
-                          }
-                        </View>
-                      )
-                    }
-                  }
-                  stuff={stuff}
-                />
-              )
-            }
-          }
-        />
+                  })
+              }
+              keyExtractor={(stuff) => (stuff.id.toString())}
+              renderItem={
+                (item) => {
+                  const stuff = item.item
+                  return (
+                    <StuffSnippet
+                      iconColorDone={colors.MEDIUM_SEA_GREEN}
+                      onPressCheckBox={
+                        () => {
+                          const promise = stuff.dateDone
+                            ?
+                            updateStuffDateDoneToNull(stuff.id)
+                            :
+                            updateStuffDateDone(stuff.id)
+                          promise
+                            .then(() => {
+                              return this.updateReadStuff()
+                            })
+                        }
+                      }
+                      onSwipeableLeftOpen={
+                        () => {
+                          updateStuffDateArchived(stuff.id)
+                            .then(() => {
+                              this.updateReadStuff()
+                            })
+                        }
+                      }
+                      onSwipeableRightOpen={
+                        () => {
+                          updateStuffDateDeleted(stuff.id)
+                            .then(() => {
+                              this.updateReadStuff()
+                            })
+                        }
+                      }
+                      renderLeftActions={
+                        (willOpen) => () => {
+                          return (
+                            <View
+                              style={
+                                {
+                                  alignItems: 'flex-start',
+                                  backgroundColor: colors.MEDIUM_SEA_GREEN,
+                                  justifyContent: 'center',
+                                  paddingLeft: dimensions.PADDING,
+                                  width: dimensions.PERCENT_100
+                                }
+                              }
+                            >
+                              {
+                                willOpen
+                                  ?
+                                  <ActivityIndicator
+                                    color={colors.WHITE}
+                                  />
+                                  :
+                                  <Icon
+                                    color={colors.WHITE}
+                                    name='archive'
+                                    type='material'
+                                  />
+                              }
+                            </View>
+                          )
+                        }
+                      }
+                      renderRightActions={
+                        (willOpen) => () => {
+                          return (
+                            <View
+                              style={
+                                {
+                                  alignItems: 'flex-end',
+                                  backgroundColor: colors.TOMATO,
+                                  justifyContent: 'center',
+                                  paddingRight: dimensions.PADDING,
+                                  width: dimensions.PERCENT_100
+                                }
+                              }
+                            >
+                              {
+                                willOpen
+                                  ?
+                                  <ActivityIndicator
+                                    color={colors.WHITE}
+                                  />
+                                  :
+                                  <Icon
+                                    color={colors.WHITE}
+                                    name='delete-sweep'
+                                    type='material'
+                                  />
+                              }
+                            </View>
+                          )
+                        }
+                      }
+                      stuff={stuff}
+                    />
+                  )
+                }
+              }
+            />
+            :
+            <Greet
+              greeting="You're all done. Enjoy your day!"
+              iconName='mood'
+              style={
+                {
+                  flex: 1
+                }
+              }
+            />
+        }
         <View
           style={
             {
