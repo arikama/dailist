@@ -12,3 +12,7 @@ Simple yet powerful app to get shit done.
 1. Enter correct `MYAPP_RELEASE_KEY_PASSWORD` & `MYAPP_RELEASE_STORE_PASSWORD` passwords in `android/gradle.properties`.
 2. `cd android`
 3. `./gradlew assembleRelease`
+
+## Version update
+
+1. `./update.sh x.x.x`
