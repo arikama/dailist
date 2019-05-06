@@ -1,6 +1,6 @@
 {
   "name": "dailist",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "scripts": {
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
