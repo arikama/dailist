@@ -13,6 +13,9 @@ then
   git add -A
   git commit -m "update to v$1"
   git tag -a --message="dailist v$1" "v$1"
+  git checkout develop
+  git merge master
+  git checkout master
 else
   echo "update failed"
 fi
