@@ -5,14 +5,12 @@ const FILE_BUILD_GRADLE = 'android/app/build.gradle'
 const FILE_PACKAGE_JSON = 'package.json'
 
 if (process.argv.length < 3) {
-  console.error('specify next version')
-  return
+  throw 'specify next version'
 }
 
 const nextVersionMatch = process.argv[2].match(/^\d+\.\d+\.\d+$/)
 if (!nextVersionMatch) {
-  console.error('wrong next version format')
-  return
+  throw 'wrong next version format'
 }
 
 const nextVersion = nextVersionMatch[0]
