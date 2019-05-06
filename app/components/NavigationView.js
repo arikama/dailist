@@ -1,9 +1,18 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
 import { colors } from 'dl/constants'
 
 export default class extends Component {
+  static propTypes = {
+    onDidBlur: PropTypes.func,
+    onDidFocus: PropTypes.func,
+    onWillBlur: PropTypes.func,
+    onWillFocus: PropTypes.func,
+    style: PropTypes.object
+  }
+
   render () {
     return (
       <View
